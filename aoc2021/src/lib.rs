@@ -58,8 +58,17 @@ mod diagnostic_tests {
     fn test_get_power_consumtion() {
         use crate::submarine::diagnostic;
 
-        let power_consumption = diagnostic::get_power_consumtion("day3_data/test_data.txt").unwrap();
+        let power_consumption =
+            diagnostic::get_power_consumtion("day3_data/test_data.txt").unwrap();
 
         assert_eq!(power_consumption, 198);
+    }
+    #[test]
+    fn test_get_life_support() {
+        use crate::submarine::diagnostic;
+
+        let life_support = diagnostic::get_life_support("day3_data/test_data.txt").unwrap();
+
+        assert_eq!(life_support, 230);
     }
 }
