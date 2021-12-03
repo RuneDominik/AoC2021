@@ -2,6 +2,7 @@ mod submarine;
 
 use crate::submarine::piloting;
 use crate::submarine::sonar;
+use crate::submarine::diagnostic;
 
 fn main() {
     println!("=================== Day 1 ===================");
@@ -19,4 +20,6 @@ fn main() {
     println!("The manual course is {}", course_maual);
 
     println!("=================== Day 3 ===================");
+    let power_consumption = diagnostic::get_power_consumtion("aoc2021/day3_data/data.txt").unwrap();
+    println!("The auto course is {}", power_consumption);
 }

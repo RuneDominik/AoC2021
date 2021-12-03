@@ -51,3 +51,15 @@ mod piloting_tests {
         assert_eq!(course, 900);
     }
 }
+
+#[cfg(test)]
+mod diagnostic_tests {
+    #[test]
+    fn test_get_power_consumtion() {
+        use crate::submarine::diagnostic;
+
+        let power_consumption = diagnostic::get_power_consumtion("day3_data/test_data.txt").unwrap();
+
+        assert_eq!(power_consumption, 198);
+    }
+}
