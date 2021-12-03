@@ -1,2 +1,2 @@
-pub mod sonar;
 pub mod piloting;
+pub mod sonar;

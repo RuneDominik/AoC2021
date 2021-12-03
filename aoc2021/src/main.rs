@@ -1,7 +1,7 @@
 mod submarine;
 
-use crate::submarine::sonar;
 use crate::submarine::piloting;
+use crate::submarine::sonar;
 
 fn main() {
     println!("=================== Day 1 ===================");

@@ -5,9 +5,9 @@ use std::{
     io::{prelude::*, BufReader, Error},
     path::Path,
 };
-pub fn get_course_auto(path: impl AsRef<Path>) -> Result<i64, Error>{
+pub fn get_course_auto(path: impl AsRef<Path>) -> Result<i64, Error> {
     let file = File::open(path)?;
-    
+
     let br = BufReader::new(file);
 
     let course = br.lines();
@@ -29,20 +29,18 @@ pub fn get_course_auto(path: impl AsRef<Path>) -> Result<i64, Error>{
 
         if direction == "forward" {
             forward += amount;
-        }
-        else if direction == "up" {
+        } else if direction == "up" {
             depth -= amount;
-        }
-        else if direction == "down" {
+        } else if direction == "down" {
             depth += amount;
         }
     }
 
-    return Ok(forward*depth);
+    return Ok(forward * depth);
 }
-pub fn get_course_manual(path: impl AsRef<Path>) -> Result<i64, Error>{
+pub fn get_course_manual(path: impl AsRef<Path>) -> Result<i64, Error> {
     let file = File::open(path)?;
-    
+
     let br = BufReader::new(file);
 
     let course = br.lines();
@@ -65,15 +63,13 @@ pub fn get_course_manual(path: impl AsRef<Path>) -> Result<i64, Error>{
 
         if direction == "forward" {
             forward += amount;
-            depth += amount*aim;
-        }
-        else if direction == "up" {
+            depth += amount * aim;
+        } else if direction == "up" {
             aim -= amount;
-        }
-        else if direction == "down" {
+        } else if direction == "down" {
             aim += amount;
         }
     }
 
-    return Ok(forward*depth);
+    return Ok(forward * depth);
 }
