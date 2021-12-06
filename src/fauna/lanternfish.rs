@@ -5,7 +5,7 @@ use std::{
     io::{prelude::*, BufReader, Error},
     path::Path,
 };
-use std::fmt;
+use rayon::prelude::*;
 
 #[derive(Clone, Copy)]
 struct Fish {
@@ -16,15 +16,14 @@ struct School {
     school: Vec<Fish>,
 }
 
-impl<'a> IntoIterator for &'a School {
-    type Item = Fish;
-    type IntoIter = std::iter::Copied<std::slice::Iter<'a, Fish>>;
-    
-    fn into_iter(self) -> Self::IntoIter {
-        self.school.iter().copied()
-    }
-}
-
+// impl<'a> IntoIterator for &'a School {
+//     type Item = Fish;
+//     type IntoIter = std::iter::Copied<std::slice::Iter<'a, Fish>>;
+//     
+//     fn into_iter(self) -> Self::IntoIter {
+//         self.school.iter().copied()
+//     }
+// }
 
 impl Fish {
     fn age(&mut self) -> i8 {
@@ -39,14 +38,6 @@ impl Fish {
         }
     }
 
-impl fmt::Display for Fish {
-    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-        let tmp = self.time_till_spawn.to_string();
-
-        formatter.pad_integral(self.time_till_spawn >= 0, "Foo ", &tmp)
-    }
-}
-
 impl School {
     pub fn new(ages: Vec<i8>) -> School {
         let mut school = Vec::new();
@@ -60,30 +51,21 @@ impl School {
         }
     }
 
-    fn spawn(school: &mut Vec<Fish>, i:i64) {
-        if i > 0 {
-            for _j in 0..i {
-                school.push(Fish {time_till_spawn: 8})
-            }
-        }
+    fn spawn(school: &mut Vec<Fish>, i:usize) {
+        let mut new_fish = vec![Fish {time_till_spawn: 8}; i];
+        school.append(&mut new_fish);
     }
 
     fn advance_one_day(school: &mut Vec<Fish>) {
-        let mut i: i64 = 0;
-
-        let ages = school.into_iter().map(|x| x.age()).collect::<Vec<_>>();
-        
-        for a in ages {
-            if a == 0 {
-                i += 1;
-            }
-        }
-
+        let i = school.into_par_iter().map(|x| x.age()).filter(|&n| n == 0).count();
         School::spawn(school, i);
     }
 
-    pub fn advance(&mut self, days: u8){
-        for _day in 0..days {
+    pub fn advance(&mut self, days: u16){
+        for day in 0..days {
+            if day % 10 == 0 {
+                println!("The day is {}", day);
+            }
             School::advance_one_day(&mut self.school);
         }
     }
@@ -98,7 +80,7 @@ impl School {
 
 }
 
-pub fn get_lanternfish_population(path: impl AsRef<Path>, days: u8) -> Result<i64, Error> {
+pub fn get_lanternfish_population(path: impl AsRef<Path>, days: u16) -> Result<i64, Error> {
     let file = File::open(path)?;
 
     let br = BufReader::new(file);
