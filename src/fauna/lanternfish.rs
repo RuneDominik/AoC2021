@@ -72,8 +72,6 @@ impl School {
         let mut i: i64 = 0;
 
         let ages = school.into_iter().map(|x| x.age()).collect::<Vec<_>>();
-
-        println!("{:?}", ages);
         
         for a in ages {
             if a == 0 {
