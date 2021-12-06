@@ -3,6 +3,7 @@ mod submarine;
 use crate::submarine::diagnostic;
 use crate::submarine::piloting;
 use crate::submarine::sonar;
+use crate::fauna::lanternfish;
 
 fn main() {
     println!("=================== Day 1 ===================");
@@ -27,4 +28,12 @@ fn main() {
     println!("The auto course is {}", life_support);
 
     println!("=================== Day 4 ===================");
+
+    println!("=================== Day 5 ===================");
+
+    println!("=================== Day 6 ===================");
+    let days80: u8 = 80;
+    let fish_80days = //Fish is the actual plural of fish. Fishes would be multiple species of fish. 
+        lanternfish::get_lanternfish_population("day6_data/data.txt", days80).unwrap();
+    println!("There are {} lanternfish after 80 days.", fish_80days)
 }

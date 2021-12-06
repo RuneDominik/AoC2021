@@ -1,4 +1,5 @@
 mod submarine;
+mod fauna;
 
 #[cfg(test)]
 mod sonar_tests {
@@ -70,5 +71,25 @@ mod diagnostic_tests {
         let life_support = diagnostic::get_life_support("day3_data/test_data.txt").unwrap();
 
         assert_eq!(life_support, 230);
+    }
+}
+
+#[cfg(test)]
+mod lanternfish_tests {
+    #[test]
+    fn test_get_lanternfish_population() {
+        use crate::fauna::lanternfish;
+
+        let days18: u8 = 18;
+        let days80: u8 = 80;
+
+        let fish_18days = //Fish is the actual plural of fish. Fishes would be multiple species of fish. 
+            lanternfish::get_lanternfish_population("day6_data/test_data.txt", days18).unwrap();
+
+        let fish_80days = 
+            lanternfish::get_lanternfish_population("day6_data/test_data.txt", days80).unwrap();
+
+        assert_eq!(fish_18days, 26);
+        assert_eq!(fish_80days, 5934);
     }
 }
