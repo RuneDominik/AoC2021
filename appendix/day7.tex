@@ -1,0 +1,87 @@
+% Basic setup. Most papers should leave these options alone.
+\documentclass[fleqn,usenatbib]{scrartcl}
+
+\usepackage[aux]{rerunfilecheck}
+\usepackage{polyglossia}
+\setmainlanguage{german}
+\usepackage{fontspec}
+
+
+% Only include extra packages if you really need them. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{siunitx}
+\usepackage{subcaption}
+\sisetup{separate-uncertainty=true}
+\DeclareSIUnit\year{yr}
+\DeclareSIUnit\parsec{pc}
+\DeclareSIUnit\Jy{Jy}
+\DeclareSIUnit\beam{beam}
+\DeclareSIUnit\mas{marcsec}
+\usepackage{xcolor}
+
+
+\title{AoC2021 - Day 7 - Part 2}
+
+% Don't change these lines
+\begin{document}
+\maketitle
+Seien $n_{i} \in \mathbf{N}$ die Positionen der $n$ Krabben-U-Boote.
+Die Bewegung des $i$-ten U-Bootes auf eine Zielposition $x$ verursacht Kosten in Höhe von 
+\begin{equation*}
+    c_{i}(x) = \sum_{j = 1}^{|n_{i} - x|} j
+\end{equation*}
+was sich bei Nutzung der Gausschen Summenformel zu 
+\begin{equation*}
+    c_{i}(x) = \frac{|n_{i} - x|^{2} + |n_{i} - x|}{2}
+\end{equation*}
+vereinfacht. Die Gesamtkostenfunktion ist somit
+\begin{equation*}
+    c(x \,|\, \mathbf{n}) = \sum_{i} \frac{|n_{i} - x|^{2} + |n_{i} - x|}{2}.
+\end{equation*}
+Diese Kostenfunktion soll minimiert werden, also muss
+\begin{equation*}
+\frac{\mathrm{d}}{\mathrm{d}x} c(x  \,|\, \mathbf{n}) \stackrel{!}{=} 0
+\end{equation*}
+gelten. Es ergibt sich also
+\begin{equation*}
+    \frac{\mathrm{d}}{\mathrm{d}x} c(x  \,|\, \mathbf{n}) = \sum_{i} \left( x - n_{i} - \frac{\mathrm{sgn}(x-n_{i})}{2}\right) \stackrel{!}{=} 0,
+\end{equation*}
+durch weitere Umformung folgt
+\begin{equation}
+    \hat{x} - \frac{\sum_{i} \mathrm{sgn}(\hat{x}-n_{i})}{2n} = \frac{\sum_{i} n_{i}}{n}.
+    \label{eq1}
+\end{equation}
+Dieser Ausdruck ist nicht analytisch für $\hat{x}$ lösbar, solange nicht einige Annahmen getroffen werden:
+\begin{enumerate}
+    \item Die Werte $n_{i}$ stammen aus einer um ihren Erwartungswert $\mu$ symmetrischen Verteilung.
+    \item Es liegen ausreichend Stichproben vor, sodass $\frac{\sum_{i} n_{i}}{n}$ ein guter Schätzer für $\mu$ ist, seine Varianz also gegen 0 geht.
+\end{enumerate}
+In diesem Fall kann $\hat{x}$ zum Stichprobenmittel $\frac{\sum_{i} n_{i}}{n}$ geraten werden. Für diesen Fall fällt der 
+\textit{signum}-Term gerade zu 0 weg, wie die Berechnung des entsprechenden Erwartungswertes zeigt
+\begin{equation*}
+    \mathrm{E} \left( \frac{\sum_{i} \mathrm{sgn}(\frac{\sum_{i} n_{i}}{n} - n_{i})}{2n} \right) = 
+    \frac{\sum_{i} \mathrm{sgn}\left(\mathrm{E} \left(\frac{\sum_{i} n_{i}}{n}\right)- \mathrm{E}(n_{i}) \right)}{2}
+    = \frac{\mu - \mu}{2} = 0.
+\end{equation*}
+Aufgrund von Annahme 2 verschwindet auch die Varianz dieses Terms für ausreichend großes $n$, sodass sich 
+\begin{equation*}
+    \hat{x} = \frac{\sum_{i} n_{i}}{n}
+\end{equation*}
+als bester Schätzer für die Zielposition ergibt. Da nur ganzzahlige Positionen erlaubt sind muss dieses Ergebnis gerundet werden.
+
+
+Eine alternative Argumentation ausgehend von Formel \ref{eq1} identifiziert den \textit{signum}-Term mit dem mittleren Vorzeichen, 
+entsprechend
+\begin{equation*}
+    \hat{x} - \frac{1}{2} \mathrm{mean}(\mathrm{sgn}(\hat{x}-n_{i})) = \frac{\sum_{i} n_{i}}{n}.
+\end{equation*}
+Da $\mathrm{sgn}(\hat{x}-n_{i}) \in \{-1, 1 \}$ gilt muss $-1 \le \mathrm{mean}(\mathrm{sgn}(\hat{x}-n_{i})) \le 1$
+gelten. Es ergibt sich somit 
+\begin{equation}
+    \left| \hat{x} - \frac{\sum_{i} n_{i}}{n} \right| \le \frac{1}{2},
+\end{equation}
+der optimale Schätzwert liegt entsprechend maximal 0.5 vom Mittelwert entfernt, also auch hier wieder im Rahmen der Rundung, die aufgrund der ganzzahligen 
+Positionen notwendig ist.
+
+\end{document}
