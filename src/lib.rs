@@ -1,5 +1,5 @@
-mod submarine;
 mod fauna;
+mod submarine;
 
 #[cfg(test)]
 mod sonar_tests {
@@ -86,10 +86,31 @@ mod lanternfish_tests {
         let fish_18days = //Fish is the actual plural of fish. Fishes would be multiple species of fish. 
             lanternfish::get_lanternfish_population("data/day6_data/test_data.txt", days18).unwrap();
 
-        let fish_80days = 
-            lanternfish::get_lanternfish_population("data/day6_data/test_data.txt", days80).unwrap();
+        let fish_80days =
+            lanternfish::get_lanternfish_population("data/day6_data/test_data.txt", days80)
+                .unwrap();
 
         assert_eq!(fish_18days, 26);
         assert_eq!(fish_80days, 5934);
+    }
+}
+
+#[cfg(test)]
+mod crab_tests {
+    #[test]
+    fn test_get_lin_consumption() {
+        use crate::fauna::crab;
+
+        let consumption_lin = crab::get_lin_consumption("data/day7_data/test_data.txt").unwrap();
+
+        assert_eq!(consumption_lin, 37);
+    }
+    #[test]
+    fn test_get_quad_consumption() {
+        use crate::fauna::crab;
+
+        let consumption_quad = crab::get_quad_consumption("data/day7_data/test_data.txt").unwrap();
+
+        assert_eq!(consumption_quad, 168);
     }
 }
