@@ -168,7 +168,7 @@ pub fn get_life_support(path: impl AsRef<Path>) -> Result<i64, Error> {
     }
 
     let carbon = i64::from_str_radix(cloned_output[0], 2).unwrap();
-    
+
     // return product
     return Ok(oxy * carbon);
 }
