@@ -1,4 +1,5 @@
 mod fauna;
+mod geology;
 mod submarine;
 
 #[cfg(test)]
@@ -112,5 +113,25 @@ mod crab_tests {
         let consumption_quad = crab::get_quad_consumption("data/day7_data/test_data.txt").unwrap();
 
         assert_eq!(consumption_quad, 168);
+    }
+}
+
+#[cfg(test)]
+mod lavatubes_tests {
+    #[test]
+    fn test_get_risk_level() {
+        use crate::geology::lavatubes;
+
+        let risk_level = lavatubes::get_risk_level("data/day9_data/test_data.txt").unwrap();
+
+        assert_eq!(risk_level, 15);
+    }
+    #[test]
+    fn test_get_basin_size() {
+        use crate::geology::lavatubes;
+
+        let basin_size = lavatubes::get_basin_size("data/day9_data/test_data.txt").unwrap();
+
+        assert_eq!(basin_size, 1134);
     }
 }

@@ -1,8 +1,10 @@
 mod fauna;
+mod geology;
 mod submarine;
 
 use crate::fauna::crab;
 use crate::fauna::lanternfish;
+use crate::geology::lavatubes;
 use crate::submarine::diagnostic;
 use crate::submarine::piloting;
 use crate::submarine::sonar;
@@ -50,4 +52,13 @@ fn main() {
 
     let quad_cons = crab::get_quad_consumption("data/day7_data/data.txt").unwrap();
     println!("There quadratic fuel consumption is {}.", quad_cons);
+
+    println!("=================== Day 8 ===================");
+
+    println!("=================== Day 9 ===================");
+    let risk_level = lavatubes::get_risk_level("data/day9_data/data.txt").unwrap();
+    println!("There risk level is {}.", risk_level);
+
+    let basin_size = lavatubes::get_basin_size("data/day9_data/data.txt").unwrap();
+    println!("There multiplied basin size is {}.", basin_size);
 }
