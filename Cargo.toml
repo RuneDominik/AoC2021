@@ -11,3 +11,4 @@ path = "src/lib.rs"
 
 [dependencies]
 rayon = "1.5"
+itertools = "0.10.3"
