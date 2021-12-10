@@ -8,6 +8,7 @@ use crate::geology::lavatubes;
 use crate::submarine::diagnostic;
 use crate::submarine::piloting;
 use crate::submarine::sonar;
+use crate::submarine::syntax;
 
 fn main() {
     println!("=================== Day 1 ===================");
@@ -61,4 +62,11 @@ fn main() {
 
     let basin_size = lavatubes::get_basin_size("data/day9_data/data.txt").unwrap();
     println!("There multiplied basin size is {}.", basin_size);
+
+    println!("=================== Day 10 ===================");
+    let error_score = syntax::get_corrupted_lines("data/day10_data/data.txt").unwrap();
+    println!("There error score is {}.", error_score);
+
+    let completion_score = syntax::get_completed_lines("data/day10_data/data.txt").unwrap();
+    println!("There completion score is {}.", completion_score);
 }

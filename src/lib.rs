@@ -135,3 +135,24 @@ mod lavatubes_tests {
         assert_eq!(basin_size, 1134);
     }
 }
+
+#[cfg(test)]
+mod syntax_tests {
+    #[test]
+    fn test_get_corrupted_lines() {
+        use crate::submarine::syntax;
+
+        let error_score = syntax::get_corrupted_lines("data/day10_data/test_data.txt").unwrap();
+
+        assert_eq!(error_score, 26397);
+    }
+    #[test]
+    fn test_get_() {
+        use crate::submarine::syntax;
+
+        let completion_score =
+            syntax::get_completed_lines("data/day10_data/test_data.txt").unwrap();
+
+        assert_eq!(completion_score, 288957);
+    }
+}
