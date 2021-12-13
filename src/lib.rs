@@ -156,3 +156,16 @@ mod syntax_tests {
         assert_eq!(completion_score, 288957);
     }
 }
+
+#[cfg(test)]
+mod thermal_camera_tests {
+    #[test]
+    fn test_get_first_fold() {
+        use crate::submarine::thermal_camera;
+
+        let dots_first_fold =
+            thermal_camera::get_first_fold("data/day13_data/test_data.txt").unwrap();
+
+        assert_eq!(dots_first_fold, 17);
+    }
+}

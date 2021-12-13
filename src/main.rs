@@ -9,6 +9,7 @@ use crate::submarine::diagnostic;
 use crate::submarine::piloting;
 use crate::submarine::sonar;
 use crate::submarine::syntax;
+use crate::submarine::thermal_camera;
 
 fn main() {
     println!("=================== Day 1 ===================");
@@ -69,4 +70,17 @@ fn main() {
 
     let completion_score = syntax::get_completed_lines("data/day10_data/data.txt").unwrap();
     println!("There completion score is {}.", completion_score);
+
+    println!("=================== Day 11 ===================");
+
+    println!("=================== Day 12 ===================");
+
+    println!("=================== Day 13 ===================");
+    let n_points_first_fold = thermal_camera::get_first_fold("data/day13_data/data.txt").unwrap();
+    println!(
+        "There are {} points after the first fold.",
+        n_points_first_fold
+    );
+    let n_points_all_fold = thermal_camera::get_code("data/day13_data/data.txt").unwrap();
+    println!("There are {} points after all folds.", n_points_all_fold);
 }
