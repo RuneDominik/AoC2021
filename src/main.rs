@@ -10,6 +10,7 @@ use crate::submarine::piloting;
 use crate::submarine::sonar;
 use crate::submarine::syntax;
 use crate::submarine::thermal_camera;
+use crate::submarine::reactor;
 
 fn main() {
     println!("=================== Day 1 ===================");
@@ -83,4 +84,37 @@ fn main() {
     );
     let n_points_all_fold = thermal_camera::get_code("data/day13_data/data.txt").unwrap();
     println!("There are {} points after all folds.", n_points_all_fold);
+
+    println!("=================== Day 14 ===================");
+
+    println!("=================== Day 15 ===================");
+
+    println!("=================== Day 16 ===================");
+
+    println!("=================== Day 17 ===================");
+
+    println!("=================== Day 18 ===================");
+
+    println!("=================== Day 19 ===================");
+
+    println!("=================== Day 20 ===================");
+
+    println!("=================== Day 21 ===================");
+
+    println!("=================== Day 22 ===================");
+    let active_cubes = reactor::initialize_reactor("data/day22_data/data.txt").unwrap();
+    println!(
+        "There are {} cubes activated.",
+        active_cubes
+    );
+
+    //let restarted_cubes = reactor::restart_reactor("data/day22_data/test_data.txt").unwrap();
+    //println!(
+    //    "There are {} cubes activated.",
+    //    restarted_cubes
+    //);
+
+    println!("=================== Day 23 ===================");
+
+    println!("=================== Day 24 ===================");
 }

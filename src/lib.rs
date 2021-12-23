@@ -169,3 +169,16 @@ mod thermal_camera_tests {
         assert_eq!(dots_first_fold, 17);
     }
 }
+
+#[cfg(test)]
+mod reactor_tests {
+    #[test]
+    fn test_initialize_reactor() {
+        use crate::submarine::reactor;
+
+        let cubes_active =
+            reactor::initialize_reactor("data/day22_data/test_data.txt").unwrap();
+
+        assert_eq!(cubes_active, 590784);
+    }
+}
