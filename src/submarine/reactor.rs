@@ -1,26 +1,19 @@
 #![allow(dead_code)]
 
 use std::{
+    collections::HashSet,
     fs::File,
     io::{prelude::*, BufReader, Error},
     path::Path,
-    collections::HashSet,
 };
 
-type Bounds = (
-    isize,
-    isize,
-);
+type Bounds = (isize, isize);
 
-type Cube = (
-    Bounds,
-    Bounds,
-    Bounds,
-);
+type Cube = (Bounds, Bounds, Bounds);
 
 struct ActionCube {
     activate: bool,
-    cube: Cube
+    cube: Cube,
 }
 
 pub fn initialize_reactor(path: impl AsRef<Path>) -> Result<usize, Error> {
@@ -33,38 +26,75 @@ pub fn initialize_reactor(path: impl AsRef<Path>) -> Result<usize, Error> {
 
     for line in lines {
         if line.contains("on") {
-            let substring = line.replace("on ", "").replace("x=", "").replace("y=", "").replace("z=", "");
+            let substring = line
+                .replace("on ", "")
+                .replace("x=", "")
+                .replace("y=", "")
+                .replace("z=", "");
             let directions: Vec<&str> = substring.split(",").collect();
-            let x_range: Vec<i32> = directions[0].split("..").map(|x| x.parse::<i32>().unwrap()).collect();
-            let y_range: Vec<i32> = directions[1].split("..").map(|x| x.parse::<i32>().unwrap()).collect();
-            let z_range: Vec<i32> = directions[2].split("..").map(|x| x.parse::<i32>().unwrap()).collect();
+            let x_range: Vec<i32> = directions[0]
+                .split("..")
+                .map(|x| x.parse::<i32>().unwrap())
+                .collect();
+            let y_range: Vec<i32> = directions[1]
+                .split("..")
+                .map(|x| x.parse::<i32>().unwrap())
+                .collect();
+            let z_range: Vec<i32> = directions[2]
+                .split("..")
+                .map(|x| x.parse::<i32>().unwrap())
+                .collect();
 
-            if x_range[0] > 50 || x_range[1] < -50 || y_range[0] > 50 || y_range[1] < -50 || z_range[0] > 50 || z_range[1] < -50 {
+            if x_range[0] > 50
+                || x_range[1] < -50
+                || y_range[0] > 50
+                || y_range[1] < -50
+                || z_range[0] > 50
+                || z_range[1] < -50
+            {
                 continue;
             }
 
-            for x in x_range[0]..x_range[1]+1{
-                for y in y_range[0]..y_range[1]+1{
-                    for z in z_range[0]..z_range[1]+1{
+            for x in x_range[0]..x_range[1] + 1 {
+                for y in y_range[0]..y_range[1] + 1 {
+                    for z in z_range[0]..z_range[1] + 1 {
                         active_cubes.insert(vec![x, y, z]);
                     }
                 }
             }
-        }
-        else if line.contains("off") {
-            let substring = line.replace("off ", "").replace("x=", "").replace("y=", "").replace("z=", "");
+        } else if line.contains("off") {
+            let substring = line
+                .replace("off ", "")
+                .replace("x=", "")
+                .replace("y=", "")
+                .replace("z=", "");
             let directions: Vec<&str> = substring.split(",").collect();
-            let x_range: Vec<i32> = directions[0].split("..").map(|x| x.parse::<i32>().unwrap()).collect();
-            let y_range: Vec<i32> = directions[1].split("..").map(|x| x.parse::<i32>().unwrap()).collect();
-            let z_range: Vec<i32> = directions[2].split("..").map(|x| x.parse::<i32>().unwrap()).collect();
+            let x_range: Vec<i32> = directions[0]
+                .split("..")
+                .map(|x| x.parse::<i32>().unwrap())
+                .collect();
+            let y_range: Vec<i32> = directions[1]
+                .split("..")
+                .map(|x| x.parse::<i32>().unwrap())
+                .collect();
+            let z_range: Vec<i32> = directions[2]
+                .split("..")
+                .map(|x| x.parse::<i32>().unwrap())
+                .collect();
 
-            if x_range[0] > 50 || x_range[1] < -50 || y_range[0] > 50 || y_range[1] < -50 || z_range[0] > 50 || z_range[1] < -50 {
+            if x_range[0] > 50
+                || x_range[1] < -50
+                || y_range[0] > 50
+                || y_range[1] < -50
+                || z_range[0] > 50
+                || z_range[1] < -50
+            {
                 continue;
             }
 
-            for x in x_range[0]..x_range[1]+1{
-                for y in y_range[0]..y_range[1]+1{
-                    for z in z_range[0]..z_range[1]+1{
+            for x in x_range[0]..x_range[1] + 1 {
+                for y in y_range[0]..y_range[1] + 1 {
+                    for z in z_range[0]..z_range[1] + 1 {
                         active_cubes.remove(&vec![x, y, z]);
                     }
                 }
