@@ -6,11 +6,12 @@ use crate::fauna::crab;
 use crate::fauna::lanternfish;
 use crate::geology::lavatubes;
 use crate::submarine::diagnostic;
+use crate::submarine::leisure;
 use crate::submarine::piloting;
+use crate::submarine::reactor;
 use crate::submarine::sonar;
 use crate::submarine::syntax;
 use crate::submarine::thermal_camera;
-use crate::submarine::reactor;
 
 fn main() {
     println!("=================== Day 1 ===================");
@@ -100,13 +101,16 @@ fn main() {
     println!("=================== Day 20 ===================");
 
     println!("=================== Day 21 ===================");
+    let deterministic_dirac_score =
+        leisure::deterministic_dirac("data/day21_data/data.txt").unwrap();
+    println!(
+        "There score after the practice game is {}.",
+        deterministic_dirac_score
+    );
 
     println!("=================== Day 22 ===================");
     let active_cubes = reactor::initialize_reactor("data/day22_data/data.txt").unwrap();
-    println!(
-        "There are {} cubes activated.",
-        active_cubes
-    );
+    println!("There are {} cubes activated.", active_cubes);
 
     //let restarted_cubes = reactor::restart_reactor("data/day22_data/test_data.txt").unwrap();
     //println!(

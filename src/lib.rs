@@ -171,13 +171,24 @@ mod thermal_camera_tests {
 }
 
 #[cfg(test)]
+mod leisure_tests {
+    #[test]
+    fn test_deterministic_dirac() {
+        use crate::submarine::leisure;
+
+        let score = leisure::deterministic_dirac("data/day21_data/test_data.txt").unwrap();
+
+        assert_eq!(score, 739785);
+    }
+}
+
+#[cfg(test)]
 mod reactor_tests {
     #[test]
     fn test_initialize_reactor() {
         use crate::submarine::reactor;
 
-        let cubes_active =
-            reactor::initialize_reactor("data/day22_data/test_data.txt").unwrap();
+        let cubes_active = reactor::initialize_reactor("data/day22_data/test_data.txt").unwrap();
 
         assert_eq!(cubes_active, 590784);
     }
